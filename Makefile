@@ -7,7 +7,7 @@
 ###
 
 # Define 'fake' files
-.PHONY: default build
+.PHONY: default build push
 
 ### Create Dockerfiles ###
 default: php/Dockerfile php-fpm/Dockerfile php-apache/Dockerfile
@@ -49,3 +49,9 @@ build/php-apache: php-apache/Dockerfile
 		--tag=roelofr/php:7-apache \
 		--tag=roelofr/php:apache \
 		php-apache/
+
+### Publish Docker containers
+push:
+	docker push \
+		--disable-content-trust=false \
+		roelofr/php
