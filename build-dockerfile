@@ -47,7 +47,7 @@ sed -E \
   | tee "$TEMP_DOCKER" \
   > /dev/null
 
-echo > "$TEMP_HEADER" <<HEADER
+tee "$TEMP_HEADER" <<HEADER
 ###########################################################
 #                                                         #
 # THIS FILE HAS BEEN AUTOMATICALLY GENERATED. DO NOT EDIT #
@@ -55,6 +55,15 @@ echo > "$TEMP_HEADER" <<HEADER
 #                                                         #
 ###########################################################
 HEADER
+
+tee "$TARGET_PATH/README.md" <<MARKDOWN
+# \`roelofr/php:${TARGET_VERSION}\` Dockerfiles
+
+This directory will compile the \`roelofr/php:${TARGET_VERSION}\` image, based
+on \`php:${TARGET_VERSION}\`.
+
+Please check the [README][../README.md] in the root directory to continue.
+MARKDOWN
 
 cat "$TEMP_HEADER" "$TEMP_DOCKER" > "$TARGET_PATH/Dockerfile"
 
