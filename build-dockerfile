@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# Changedir to root
+ROOT="$( realpath "$( dirname "${BASH_SOURCE[0]}" )" )"
+cd "$ROOT"
+
+if [ "$#" -ne 2 ]; then
+  echo "Invalid argument count"
+  exit 1
+fi
+
+# Get params
+TARGET_FOLDER="$1"
+TARGET_VERSION="$2"
+TARGET_PATH="${ROOT}/${TARGET_FOLDER}"
+
+# Get temporary files to write to
+TEMP_DOCKER="$( tempfile )"
+TEMP_HEADER="$( tempfile )"
+
+# Start being strict on errors
+set -e
+
+# Check if directory is a directory
+if [ ! -d "$TARGET_PATH" -a -e "$TARGET_PATH" ]; then
+  echo "Directory \"$TARGET_FOLDER\" already exists and is not a folder"
+  exit 1
+fi
+
+if [ ! -e "$TARGET_PATH" ]; then
+  echo "Creating \"$TARGET_FOLDER\"..."
+  mkdir "$TARGET_PATH"
+fi
+
+# Get really, really verbose
+set -x
+
+cd "$ROOT"
+
+cp "$ROOT/install-composer.sh" "$TARGET_PATH/install-composer.sh"
+
+chmod +x "$TARGET_PATH/install-composer.sh"
+
+sed -E \
+  "s/^FROM IMAGE$/FROM ${TARGET_VERSION}/" \
+  "$ROOT/Dockerfile" \
+  | tee "$TEMP_DOCKER" \
+  > /dev/null
+
+echo > "$TEMP_HEADER" <<HEADER
+###########################################################
+#                                                         #
+# THIS FILE HAS BEEN AUTOMATICALLY GENERATED. DO NOT EDIT #
+# IF YOU NEED TO MAKE CHANGES, EDIT THE /Dockerfile FILE! #
+#                                                         #
+###########################################################
+HEADER
+
+cat "$TEMP_HEADER" "$TEMP_DOCKER" > "$TARGET_PATH/Dockerfile"
+
+rm "$TEMP_HEADER" "$TEMP_DOCKER"
