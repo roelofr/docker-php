@@ -1,4 +1,9 @@
-
+###########################################################
+#                                                         #
+# THIS FILE HAS BEEN AUTOMATICALLY GENERATED. DO NOT EDIT #
+# IF YOU NEED TO MAKE CHANGES, EDIT THE /Dockerfile FILE! #
+#                                                         #
+###########################################################
 # Configuration file for Docker
 FROM php:7-fpm
 
