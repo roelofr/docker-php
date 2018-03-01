@@ -1,5 +1,8 @@
 # PHP for Laravel
 
+![Docker Automated build status](https://img.shields.io/docker/build/roelofr/php.svg)
+![Docker Automated build](https://img.shields.io/docker/automated/roelofr/php.svg)
+
 A php installation with Composer, MySQL via PDO, multi-process signals and other
 important extensions for good testing of Laravel apps
 
