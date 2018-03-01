@@ -14,10 +14,12 @@ RUN apt-get update \
     git \
     libc6-dev \
     libcurl4-gnutls-dev \
+    libgd-dev \
     libmcrypt-dev \
     libmcrypt4 \
     libsqlite3-0 \
     libsqlite3-dev \
+    libwebp-dev \
     libxml2 \
     libxml2-dev \
     libxslt1-dev \
@@ -36,6 +38,7 @@ RUN apt-get update \
 RUN docker-php-ext-install \
     curl \
     dom \
+    gd \
     json \
     mbstring \
     mysqli \
