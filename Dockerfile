@@ -32,9 +32,11 @@ RUN docker-php-ext-install \
     dom \
     json \
     mbstring \
+    mysqli \
     pcntl \
     pdo \
     pdo_mysql \
+    pdo_sqlite \
     simplexml \
     xml \
     zip \
