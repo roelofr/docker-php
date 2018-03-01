@@ -1,6 +1,6 @@
-# `roelofr/php:php:7` Dockerfiles
+# `roelofr/php:cli` Dockerfiles
 
-This directory will compile the `roelofr/php:php:7` image, based
-on `php:php:7`.
+This directory will compile the `roelofr/php:cli` image, based
+on `php:cli`.
 
 Please check the [README][../README.md] in the root directory to continue.

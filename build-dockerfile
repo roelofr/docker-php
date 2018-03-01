@@ -57,10 +57,10 @@ tee "$TEMP_HEADER" <<HEADER
 HEADER
 
 tee "$TARGET_PATH/README.md" <<MARKDOWN
-# \`roelofr/php:${TARGET_VERSION}\` Dockerfiles
+# \`roelofr/${TARGET_VERSION}\` Dockerfiles
 
-This directory will compile the \`roelofr/php:${TARGET_VERSION}\` image, based
-on \`php:${TARGET_VERSION}\`.
+This directory will compile the \`roelofr/${TARGET_VERSION}\` image, based
+on \`${TARGET_VERSION}\`.
 
 Please check the [README][../README.md] in the root directory to continue.
 MARKDOWN

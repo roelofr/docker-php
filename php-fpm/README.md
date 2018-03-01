@@ -1,6 +1,6 @@
-# `roelofr/php:php:7-fpm` Dockerfiles
+# `roelofr/php:fpm` Dockerfiles
 
-This directory will compile the `roelofr/php:php:7-fpm` image, based
-on `php:php:7-fpm`.
+This directory will compile the `roelofr/php:fpm` image, based
+on `php:fpm`.
 
 Please check the [README][../README.md] in the root directory to continue.

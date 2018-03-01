@@ -9,9 +9,9 @@ Could also work for, you know, other stuff
 
 This image contains three variants; which are all based on the [`php`][php] repository.
 
- - **CLI** - Tagged as `cli`, `7-cli`, `latest` ([Dockerfile][d1]).
- - **FPM** - Tagged as `fpm`, `7-fpm` ([Dockerfile][d2]).
- - **Apache** - Tagged as `apache`, `7-apache` ([Dockerfile][d3]).
+ - **CLI** - Tagged as `cli`, `latest` ([Dockerfile][d1]).
+ - **FPM** - Tagged as `fpm` ([Dockerfile][d2]).
+ - **Apache** - Tagged as `apache` ([Dockerfile][d3]).
 
 [php]: https://hub.docker.com/_/php/
 [d1]: php/Dockerfile

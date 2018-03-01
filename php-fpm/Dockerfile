@@ -5,7 +5,7 @@
 #                                                         #
 ###########################################################
 # Configuration file for Docker
-FROM php:7-fpm
+FROM php:fpm
 
 # Install dependencies and extensions for PHP
 RUN apt-get update \
