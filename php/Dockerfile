@@ -32,7 +32,7 @@ RUN apt-get update \
     zip \
     zlib1g-dev \
   && apt-get clean \
-  && rm -rf /var/cache/apt /var/lib/apt /var/lib/dpkg /var/log
+  && rm -rf /var/cache/apt /var/lib/apt /var/log/*
 
 # Install extensions
 RUN docker-php-ext-install \
