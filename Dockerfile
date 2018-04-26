@@ -30,6 +30,7 @@ RUN apt-get update \
 
 # Install extensions
 RUN docker-php-ext-install \
+    bcmath \
     curl \
     dom \
     gd \
