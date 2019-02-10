@@ -43,7 +43,7 @@ chmod +x "$TARGET_PATH/install-composer.sh"
 
 sed -E \
   "s/^FROM IMAGE$/FROM ${TARGET_VERSION}/" \
-  "$ROOT/Dockerfile" \
+  "$ROOT/dockerfile" \
   | tee "$TEMP_DOCKER" \
   > /dev/null
 
@@ -51,13 +51,13 @@ tee "$TEMP_HEADER" <<HEADER
 ###########################################################
 #                                                         #
 # THIS FILE HAS BEEN AUTOMATICALLY GENERATED. DO NOT EDIT #
-# IF YOU NEED TO MAKE CHANGES, EDIT THE /Dockerfile FILE! #
+# IF YOU NEED TO MAKE CHANGES, EDIT THE /dockerfile FILE! #
 #                                                         #
 ###########################################################
 HEADER
 
 tee "$TARGET_PATH/README.md" <<MARKDOWN
-# \`roelofr/${TARGET_VERSION}\` Dockerfiles
+# \`roelofr/${TARGET_VERSION}\` dockerfiles
 
 This directory will compile the \`roelofr/${TARGET_VERSION}\` image, based
 on \`${TARGET_VERSION}\`.
@@ -67,6 +67,6 @@ Please check the
 root directory to continue.
 MARKDOWN
 
-cat "$TEMP_HEADER" "$TEMP_DOCKER" > "$TARGET_PATH/Dockerfile"
+cat "$TEMP_HEADER" "$TEMP_DOCKER" > "$TARGET_PATH/dockerfile"
 
 rm "$TEMP_HEADER" "$TEMP_DOCKER"

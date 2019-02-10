@@ -9,22 +9,22 @@
 # Define 'fake' files
 .PHONY: default build push
 
-### Create Dockerfiles ###
-default: php/Dockerfile php-fpm/Dockerfile php-apache/Dockerfile
+### Create dockerfiles ###
+default: php/dockerfile php-fpm/dockerfile php-apache/dockerfile
 
-php/Dockerfile: Dockerfile install-composer.sh build-dockerfile
+php/dockerfile: dockerfile install-composer.sh build-dockerfile
 	./build-dockerfile php php:cli
 
-php-fpm/Dockerfile: Dockerfile install-composer.sh build-dockerfile
+php-fpm/dockerfile: dockerfile install-composer.sh build-dockerfile
 	./build-dockerfile php-fpm php:fpm
 
-php-apache/Dockerfile: Dockerfile install-composer.sh build-dockerfile
+php-apache/dockerfile: dockerfile install-composer.sh build-dockerfile
 	./build-dockerfile php-apache php:apache
 
 ### Build Docker containers ###
 build: build/php build/php-fpm build/php-apache
 
-build/php: php/Dockerfile
+build/php: php/dockerfile
 	docker build \
 		--pull=true \
 		--compress=true \
@@ -32,14 +32,14 @@ build/php: php/Dockerfile
 		--tag=roelofr/php:cli \
 		php/
 
-build/php-fpm: php-fpm/Dockerfile
+build/php-fpm: php-fpm/dockerfile
 	docker build \
 		--pull=true \
 		--compress=true \
 		--tag=roelofr/php:fpm \
 		php-fpm/
 
-build/php-apache: php-apache/Dockerfile
+build/php-apache: php-apache/dockerfile
 	docker build \
 		--pull=true \
 		--compress=true \
