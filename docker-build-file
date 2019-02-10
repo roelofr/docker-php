@@ -46,7 +46,7 @@ cat "${ROOT}/generated-header" "${ROOT}/dockerfile" \
     --regexp-extended \
     --expression="s/^FROM [a-z]+$/FROM ${TARGET_VERSION}/" \
     --expression="s/(install xdebug)/\\1-${XDEBUG_VERSION}/" \
-  | tee "$TARGET_PATH/dockerfile" \
+  | tee "$TARGET_PATH/Dockerfile" \
   > /dev/null
 
 # Remove created header
