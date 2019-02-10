@@ -13,12 +13,21 @@
 default: php/latest/dockerfile fpm/latest/dockerfile apache/latest/dockerfile
 
 php/latest/dockerfile: dockerfile install-composer.sh build-dockerfile
+	./build-dockerfile cli/7.1 php:7.1-cli
+	./build-dockerfile cli/7.2 php:7.2-cli
+	./build-dockerfile cli/7.3 php:7.3-cli
 	./build-dockerfile cli/latest php:cli
 
 fpm/latest/dockerfile: dockerfile install-composer.sh build-dockerfile
+	./build-dockerfile fpm/7.1 php:7.1-fpm
+	./build-dockerfile fpm/7.2 php:7.2-fpm
+	./build-dockerfile fpm/7.3 php:7.3-fpm
 	./build-dockerfile fpm/latest php:fpm
 
 apache/latest/dockerfile: dockerfile install-composer.sh build-dockerfile
+	./build-dockerfile apache/7.1 php:7.1-apache
+	./build-dockerfile apache/7.2 php:7.2-apache
+	./build-dockerfile apache/7.3 php:7.3-apache
 	./build-dockerfile apache/latest php:apache
 
 ### Build Docker containers ###
