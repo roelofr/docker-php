@@ -1,5 +1,5 @@
 # Configuration file for Docker
-FROM IMAGE
+FROM php
 
 # Install dependencies for extensions
 RUN apt-get update \

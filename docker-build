@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# Changedir to root
+ROOT="$( realpath "$( dirname "${BASH_SOURCE[0]}" )" )"
+
+# Adds variables used on configure and build
+source $ROOT/variables.sh
+
+# Fail on any error
+set -e
+
+function build() {
+  # Get variables
+  PLATFORM="$1"
+  VERSION="$2"
+
+  # Get Docker file
+  DOCKER_PATH="$ROOT/$PLATFORM/$VERSION"
+
+  # Arguments
+  BUILD_ARGS=(
+    --pull=true
+		--compress=true
+  )
+
+  if [ "$VERSION" = "$DEFAULT_VERSION" ]; then
+    BUILD_ARGS+=(
+      --tag=roelofr/php:${PLATFORM}
+    )
+  else
+    BUILD_ARGS+=(
+      --tag=roelofr/php:${VERSION}-${PLATFORM}
+    )
+  fi
+
+  if [ "$PLATFORM" = "$DEFAULT_PLATFORM" ]; then
+    BUILD_ARGS+=(
+      --tag=roelofr/php:${VERSION}
+    )
+  fi
+
+  echo "Running \`docker build "${BUILD_ARGS[@]}" "$DOCKER_PATH"\`"
+  docker build "${BUILD_ARGS[@]}" "$DOCKER_PATH"
+}
+
+for ((i = 0; i < ${#BUILD_TYPES[@]}; ++i)); do
+  PLATFORM="${BUILD_TYPES[$i]}"
+  echo "Building ${PLATFORM} versions"
+
+  for ((j = 0; j < ${#BUILD_VERSIONS[@]}; ++j)); do
+    VERSION=${BUILD_VERSIONS[$j]}
+
+    echo "Building ${PLATFORM} → ${VERSION}"
+    build $PLATFORM $VERSION
+  done
+done

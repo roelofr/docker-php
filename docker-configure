@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Changedir to root
+ROOT="$( realpath "$( dirname "${BASH_SOURCE[0]}" )" )"
+
+# Adds variables used on configure and build
+source $ROOT/variables.sh
+
+# Fail on any error
+set -e
+
+function build() {
+  PLATFORM="$1"
+  VERSION="$2"
+  XDEBUG_VERSION="$3"
+
+    if [ "$VERSION" = "$DEFAULT_VERSION" ]; then
+      DOCKER_VERSION="php:${PLATFORM}"
+    else
+      DOCKER_VERSION="php:${VERSION}-${PLATFORM}"
+    fi
+
+    bash $ROOT/docker-build-file "${PLATFORM}/${VERSION}" "$DOCKER_VERSION" "$XDEBUG_VERSION"
+}
+
+for ((i = 0; i < ${#BUILD_TYPES[@]}; ++i)); do
+  PLATFORM="${BUILD_TYPES[$i]}"
+  echo "Building makefiles for ${PLATFORM}"
+
+  for ((j = 0; j < ${#BUILD_VERSIONS[@]}; ++j)); do
+    VERSION=${BUILD_VERSIONS[$j]}
+    XDEBUG_VERSION=${XDEBUG_VERSIONS[$j]}
+
+    echo "Building ${VERSION} with XDebug ${XDEBUG_VERSION}"
+    build $PLATFORM $VERSION $XDEBUG_VERSION
+  done
+done
