@@ -1,4 +1,4 @@
-# `roelofr/php:apache` Dockerfiles
+# `roelofr/php:apache` dockerfiles
 
 This directory will compile the `roelofr/php:apache` image, based
 on `php:apache`.

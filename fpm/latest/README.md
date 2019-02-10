@@ -1,7 +1,7 @@
-# `roelofr/php:cli` Dockerfiles
+# `roelofr/php:fpm` dockerfiles
 
-This directory will compile the `roelofr/php:cli` image, based
-on `php:cli`.
+This directory will compile the `roelofr/php:fpm` image, based
+on `php:fpm`.
 
 Please check the
 [README](https://github.com/roelofr/docker-php/blob/master/README.md) in the

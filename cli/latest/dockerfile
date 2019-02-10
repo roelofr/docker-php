@@ -1,11 +1,11 @@
 ###########################################################
 #                                                         #
 # THIS FILE HAS BEEN AUTOMATICALLY GENERATED. DO NOT EDIT #
-# IF YOU NEED TO MAKE CHANGES, EDIT THE /Dockerfile FILE! #
+# IF YOU NEED TO MAKE CHANGES, EDIT THE /dockerfile FILE! #
 #                                                         #
 ###########################################################
 # Configuration file for Docker
-FROM php:fpm
+FROM php:cli
 
 # Install dependencies for extensions
 RUN apt-get update \

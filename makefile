@@ -10,41 +10,41 @@
 .PHONY: default build push
 
 ### Create dockerfiles ###
-default: php/dockerfile php-fpm/dockerfile php-apache/dockerfile
+default: php/latest/dockerfile fpm/latest/dockerfile apache/latest/dockerfile
 
-php/dockerfile: dockerfile install-composer.sh build-dockerfile
-	./build-dockerfile php php:cli
+php/latest/dockerfile: dockerfile install-composer.sh build-dockerfile
+	./build-dockerfile cli/latest php:cli
 
-php-fpm/dockerfile: dockerfile install-composer.sh build-dockerfile
-	./build-dockerfile php-fpm php:fpm
+fpm/latest/dockerfile: dockerfile install-composer.sh build-dockerfile
+	./build-dockerfile fpm/latest php:fpm
 
-php-apache/dockerfile: dockerfile install-composer.sh build-dockerfile
-	./build-dockerfile php-apache php:apache
+apache/latest/dockerfile: dockerfile install-composer.sh build-dockerfile
+	./build-dockerfile apache/latest php:apache
 
 ### Build Docker containers ###
-build: build/php build/php-fpm build/php-apache
+build: build/php build/fpm build/apache
 
-build/php: php/dockerfile
+build/php: php/latest/dockerfile
 	docker build \
 		--pull=true \
 		--compress=true \
 		--tag=roelofr/php:latest \
 		--tag=roelofr/php:cli \
-		php/
+		php/latest/
 
-build/php-fpm: php-fpm/dockerfile
+build/fpm: php-fpm/latest/dockerfile
 	docker build \
 		--pull=true \
 		--compress=true \
 		--tag=roelofr/php:fpm \
-		php-fpm/
+		fpm/latest/
 
-build/php-apache: php-apache/dockerfile
+build/apache: apache/latest/dockerfile
 	docker build \
 		--pull=true \
 		--compress=true \
 		--tag=roelofr/php:apache \
-		php-apache/
+		apache/latest/
 
 ### Publish Docker containers
 push:

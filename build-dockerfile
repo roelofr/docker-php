@@ -29,7 +29,7 @@ fi
 
 if [ ! -e "$TARGET_PATH" ]; then
   echo "Creating \"$TARGET_FOLDER\"..."
-  mkdir "$TARGET_PATH"
+  mkdir -p "$TARGET_PATH"
 fi
 
 # Get really, really verbose
