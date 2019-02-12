@@ -17,7 +17,7 @@ configure: dockerfile
 	./docker-configure
 
 # Build Docker containers
-build:  cli/latest/dockerfile fpm/latest/dockerfile apache/latest/dockerfile
+build:  cli/latest/Dockerfile fpm/latest/Dockerfile apache/latest/Dockerfile
 	./docker-build
 
 ### Publish Docker containers
