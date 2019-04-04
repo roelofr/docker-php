@@ -14,16 +14,15 @@ RUN apt-get update \
     git \
     libc6-dev \
     libcurl4-gnutls-dev \
+    libfreetype6-dev \
     libgd-dev \
     libmcrypt-dev \
     libmcrypt4 \
     libsqlite3-0 \
     libsqlite3-dev \
     libwebp-dev \
-    libxml2 \
     libxml2-dev \
     libxslt1-dev \
-    libxslt1.1 \
     libzip-dev \
     libzip4 \
     sqlite3 \
@@ -33,6 +32,14 @@ RUN apt-get update \
     zlib1g-dev \
   && apt-get clean \
   && rm -rf /var/cache/apt /var/lib/apt /var/log/*
+
+# Configure extensions
+RUN docker-php-ext-configure gd \
+    --with-freetype-dir=/usr/include \
+    --with-jpeg-dir=/usr/include \
+    --with-png-dir=/usr/include \
+    --with-webp-dir=/usr/include \
+    --with-xpm-dir=/usr/include
 
 # Install extensions
 RUN docker-php-ext-install \
