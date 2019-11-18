@@ -26,16 +26,19 @@ function build() {
   if [ "$VERSION" = "$DEFAULT_VERSION" ]; then
     BUILD_ARGS+=(
       --tag=roelofr/php:${PLATFORM}
+      --tag=docker.pkg.github.com/roelofr/docker-php:${PLATFORM}
     )
   else
     BUILD_ARGS+=(
       --tag=roelofr/php:${VERSION}-${PLATFORM}
+      --tag=docker.pkg.github.com/roelofr/docker-php:${VERSION}-${PLATFORM}
     )
   fi
 
   if [ "$PLATFORM" = "$DEFAULT_PLATFORM" ]; then
     BUILD_ARGS+=(
       --tag=roelofr/php:${VERSION}
+      --tag=docker.pkg.github.com/roelofr/docker-php:${VERSION}
     )
   fi
 
