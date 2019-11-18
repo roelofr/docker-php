@@ -5,7 +5,7 @@
 #                                                         #
 ###########################################################
 # Configuration file for Docker
-FROM php:7.1-fpm
+FROM php:7.4-fpm
 
 # Install dependencies for extensions
 RUN apt-get update \
@@ -62,6 +62,6 @@ COPY ./install-composer.sh /usr/src/install-composer.sh
 RUN /usr/src/install-composer.sh
 
 # Install XDebug
-RUN pecl install xdebug-stable \
+RUN pecl install xdebug-beta \
   && docker-php-ext-enable xdebug \
   && rm -rf /tmp/pear
