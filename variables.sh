@@ -7,7 +7,7 @@ BUILD_TYPES=(cli fpm apache)
 BUILD_VERSIONS=(latest 7.3 7.2 7.1)
 
 # XDebug versions
-XDEBUG_VERSIONS=(beta beta stable stable)
+XDEBUG_VERSIONS=(beta stable stable stable)
 
 # Default values
 DEFAULT_PLATFORM=cli

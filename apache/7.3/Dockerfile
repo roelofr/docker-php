@@ -62,6 +62,6 @@ COPY ./install-composer.sh /usr/src/install-composer.sh
 RUN /usr/src/install-composer.sh
 
 # Install XDebug
-RUN pecl install xdebug-beta \
+RUN pecl install xdebug-stable \
   && docker-php-ext-enable xdebug \
   && rm -rf /tmp/pear
