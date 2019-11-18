@@ -1,0 +1,40 @@
+name: "Build Docker images"
+
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['latest', '7.3', '7.2']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Log in to GitHub Packages
+        run: docker login docker.pkg.github.com -u ${GITHUB_ACTOR} --password-stdin <<< "${DOCKER_PASSWORD}"
+        env:
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull images for PHP ${{ matrix.php }}
+        run: |
+          docker pull docker.pkg.github.com/roelofr/docker-php:apache-${{ matrix.php }}
+          docker pull docker.pkg.github.com/roelofr/docker-php:cli-${{ matrix.php }}
+          docker pull docker.pkg.github.com/roelofr/docker-php:fpm-${{ matrix.php }}
+
+      - name: Build Apache image for PHP ${{ matrix.php }}
+        run: docker build -t docker.pkg.github.com/roelofr/docker-php:apache-${{ matrix.php }} apache/${{ matrix.php }}
+
+      - name: Build CLI image for PHP ${{ matrix.php }}
+        run: docker build -t docker.pkg.github.com/roelofr/docker-php:cli-${{ matrix.php }} cli/${{ matrix.php }}
+
+      - name: Build FPM image for PHP ${{ matrix.php }}
+        run: docker build -t docker.pkg.github.com/roelofr/docker-php:fpm-${{ matrix.php }} fpm/${{ matrix.php }}
+
+      - name: Upload images for PHP ${{ matrix.php }}
+        run: |
+          docker push docker.pkg.github.com/roelofr/docker-php:apache-${{ matrix.php }}
+          docker push docker.pkg.github.com/roelofr/docker-php:cli-${{ matrix.php }}
+          docker push docker.pkg.github.com/roelofr/docker-php:fpm-${{ matrix.php }}
