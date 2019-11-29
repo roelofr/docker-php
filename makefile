@@ -22,6 +22,5 @@ build:  cli/latest/Dockerfile fpm/latest/Dockerfile apache/latest/Dockerfile
 
 ### Publish Docker containers
 push:
-	docker push \
-		--disable-content-trust=false \
-		roelofr/php
+	docker push roelofr/php
+	docker push docker.pkg.github.com/roelofr/docker-php/php
