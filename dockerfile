@@ -4,6 +4,7 @@ FROM php
 # Install dependencies for extensions
 RUN apt-get update \
   && apt-get install -y \
+    automake \
     bzip2 \
     git \
     libc6-dev \
@@ -14,11 +15,13 @@ RUN apt-get update \
     libmcrypt4 \
     libsqlite3-0 \
     libsqlite3-dev \
+    libtool \
     libwebp-dev \
     libxml2-dev \
     libxslt1-dev \
     libzip-dev \
     libzip4 \
+    make \
     sqlite3 \
     unzip \
     wget \
@@ -26,6 +29,16 @@ RUN apt-get update \
     zlib1g-dev \
   && apt-get clean \
   && rm -rf /var/cache/apt /var/lib/apt /var/log/*
+
+# Install oniguruma
+RUN git clone https://github.com/kkos/oniguruma.git /usr/src/oniguruma \
+    && cd /usr/src/oniguruma \
+    && autoreconf -vfi \
+    && ./configure \
+    && make \
+    && make install \
+    && cd /root/ \
+    && rm -rf /usr/src/oniguruma
 
 # Configure and install extensions
 RUN docker-php-ext-configure gd \
